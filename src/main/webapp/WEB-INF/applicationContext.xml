@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd"
+	default-autowire="byName">
+
+	<!-- DATABASE CONFIGURATION -->
+	<!-- Loads Configuration from database.properties file -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:properties/database.properties</value>
+		</property>
+	</bean>
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="${hibernate.showSQL}" />
+				<property name="generateDdl" value="${hibernate.generateDDL}" />
+				<property name="databasePlatform" value="${hibernate.dialect}" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${db.driverClass}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.pw}" />
+	</bean>
+
+	<!-- TRANSACTION MANAGEMENT -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" />
+	<tx:annotation-driven />
+
+
+
+	<!-- BEAN DEFINITION -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="airportDao" class="ch.cnlab.atm.persistence.impl.AirportDaoImpl"/>
+	<bean id="airportService" class="ch.cnlab.atm.service.impl.AirportServiceImpl" />
+	
+	<bean id="measurementDao" class="ch.cnlab.atm.persistence.impl.MeasurementDaoImpl" />
+	<bean id="measurementService" class="ch.cnlab.atm.service.impl.MeasurementServiceImpl" />
+
+	<bean id="measureStationDao" class="ch.cnlab.atm.persistence.impl.MeasureStationDaoImpl" />
+	<bean id="measureStaionService" class="ch.cnlab.atm.service.impl.MeasureStationServiceImpl" />
+
+	<bean id="userDao" class="ch.cnlab.atm.persistence.impl.UserDaoImpl" />
+	<bean id="userService" class="ch.cnlab.atm.service.impl.UserServiceImpl" />
+
+	<!-- Scheduling config -->
+		<import resource="scheduling-context.xml" />
+	
+</beans>

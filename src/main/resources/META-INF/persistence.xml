@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="atm" transaction-type="RESOURCE_LOCAL">
+	    <class>ch.cnlab.atm.domain.Airport</class>
+	    <class>ch.cnlab.atm.domain.Alarm</class>
+	    <class>ch.cnlab.atm.domain.AverageMeasurementOneHour</class>
+	    <class>ch.cnlab.atm.domain.DataServer</class>
+	    <class>ch.cnlab.atm.domain.Flightroute</class>
+	    <class>ch.cnlab.atm.domain.Measurement</class>
+	    <class>ch.cnlab.atm.domain.MeasureStation</class>
+	    <class>ch.cnlab.atm.domain.MeasureStationConfiguration</class>
+	    <class>ch.cnlab.atm.domain.MicrophonePort</class>
+	    <class>ch.cnlab.atm.domain.Picture</class>
+	    <class>ch.cnlab.atm.domain.Role</class>
+	    <class>ch.cnlab.atm.domain.ServerConfiguration</class>
+	    <class>ch.cnlab.atm.domain.SMTPServerConfiguration</class>
+		<class>ch.cnlab.atm.domain.User</class>
+	</persistence-unit>
+
+</persistence>

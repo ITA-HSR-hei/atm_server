@@ -1,0 +1,52 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+ 
+	<http auto-config="true">
+		<intercept-url pattern="/admin*" access="ROLE_USER" />
+	</http>
+ 
+	<authentication-manager>
+	  <authentication-provider>
+	    <user-service>
+		<user name="rstaehli" password="todo" authorities="ROLE_USER" />
+		<user name="plangens" password="todo" authorities="ROLE_USER" />
+		<user name="admin" password="todo" authorities="ROLE_USER" />
+	    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+	
+	
+	
+	<!-- SECURITY MANAGEMENT -->
+	<!-- 
+	<security:http use-expressions="true" auto-config="true">
+		<security:intercept-url pattern="/xhtml/event/**"
+        						access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/xhtml/user/editUser.*"
+        						access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/xhtml/execution/editExecution.*"
+        						access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/xhtml/**"
+                                access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')"/>
+        <security:access-denied-handler error-page="/accessDenied.xhtml"/>
+        <security:form-login login-page="/login.xhtml"
+        						login-processing-url="/j_spring_security_check"/>
+        <security:logout logout-success-url="/login.jsf"/>
+        <security:session-management invalid-session-url="/login.jsf">
+        	<security:concurrency-control expired-url="/logins.jsf"/>
+        </security:session-management>
+    </security:http>
+    
+     -->
+     <!--
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="authenticationService" />
+	</security:authentication-manager>
+	-->
+ 
+</beans:beans>
